@@ -488,30 +488,7 @@
     z-index: 1; /* Lower than menu */
   }
 }
-@media (max-width: 768px) {
-  .navbar-links {
-    display: none;
-    position: fixed;
-    top: 80px; /* Match your header height */
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background: #fff;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    animation: none !important; /* Disable conflicting animations */
-  }
-  
-  .navbar-links.mobile-menu-open {
-    display: block !important;
-    transform: none !important;
-  }
-  
-  body.menu-open {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-  }
-}
+
 </style>
 
 <!-- Skills Section -->
@@ -724,32 +701,42 @@
 document.addEventListener('DOMContentLoaded', function() {
   const hamburger = document.getElementById('hamburger');
   const navMenu = document.querySelector('.navbar-links');
-  const body = document.body;
+  const header = document.querySelector('header');
+  
+  // Calculate header height for proper positioning
+  function getHeaderHeight() {
+    return header.offsetHeight;
+  }
 
-  // Initialize menu state
+  // Initialize menu
   function initMenu() {
     if (window.innerWidth <= 768) {
+      hamburger.style.display = 'block';
       navMenu.style.display = 'none';
+      navMenu.style.top = getHeaderHeight() + 'px';
       hamburger.innerHTML = '☰';
+    } else {
+      hamburger.style.display = 'none';
+      navMenu.style.display = 'flex';
     }
   }
 
-  // Toggle menu with stability fixes
-  hamburger.addEventListener('click', function() {
+  // Toggle menu
+  function toggleMenu() {
     if (window.innerWidth > 768) return;
     
-    if (navMenu.style.display === 'none' || !navMenu.style.display) {
+    if (navMenu.style.display === 'none') {
       navMenu.style.display = 'block';
       navMenu.classList.add('mobile-menu-open');
-      body.classList.add('menu-open');
       hamburger.innerHTML = '×';
+      document.body.style.overflow = 'hidden'; // Prevent page scrolling
     } else {
       navMenu.style.display = 'none';
       navMenu.classList.remove('mobile-menu-open');
-      body.classList.remove('menu-open');
       hamburger.innerHTML = '☰';
+      document.body.style.overflow = ''; // Restore scrolling
     }
-  });
+  }
 
   // Close menu when clicking links
   document.querySelectorAll('.navbar-links a').forEach(link => {
@@ -757,28 +744,32 @@ document.addEventListener('DOMContentLoaded', function() {
       if (window.innerWidth <= 768) {
         navMenu.style.display = 'none';
         navMenu.classList.remove('mobile-menu-open');
-        body.classList.remove('menu-open');
         hamburger.innerHTML = '☰';
+        document.body.style.overflow = '';
       }
     });
   });
 
   // Handle resize
   window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-      navMenu.style.display = 'flex';
-      navMenu.classList.remove('mobile-menu-open');
-      body.classList.remove('menu-open');
-      hamburger.innerHTML = '☰';
-    } else {
+    if (window.innerWidth <= 768) {
+      hamburger.style.display = 'block';
+      navMenu.style.top = getHeaderHeight() + 'px';
       if (!navMenu.classList.contains('mobile-menu-open')) {
         navMenu.style.display = 'none';
       }
+    } else {
+      hamburger.style.display = 'none';
+      navMenu.style.display = 'flex';
+      navMenu.classList.remove('mobile-menu-open');
+      hamburger.innerHTML = '☰';
+      document.body.style.overflow = '';
     }
   });
 
   // Initial setup
   initMenu();
+  hamburger.addEventListener('click', toggleMenu);
 });
 </script>
 </html>
