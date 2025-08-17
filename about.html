@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Sapna Salunke</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: sans-serif; }
+
+    header {
+      background: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: black;
+      font-weight: 600;
+      padding: 5px;
+    }
+
+    nav a:hover, nav .active {
+      color: rgb(0, 162, 255);
+      border-bottom: 2px solid orange;
+    }
+
+    .about-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 100vh;
+    }
+
+    .about-image {
+      flex: 1;
+      background: url('images/hero.jpeg') no-repeat center center/cover;
+      min-height: 400px;
+    }
+
+    .about-content {
+      flex: 1;
+      background-color: #fff;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-content h1 {
+      font-size: 32px;
+      color: #ff6a00;
+      margin-bottom: 20px;
+    }
+
+    .about-content p {
+      font-size: 18px;
+      color: #333;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div><img src="images/logo.jpeg" alt="Logo" height="40"></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="about-wrapper">
+    <div class="about-image"></div>
+    <div class="about-content">
+      <h1>About Me</h1>
+      <p>Hello, I'm <strong>Sapna Ashok Salunke</strong>, a BBA Finance graduate from Indira College of Commerce and Science. I'm currently working as a Finance Executive at <strong>Maharashtra Informatics OPC Pvt. Ltd.</strong>, managing GST, ITR, online filings, and other digital governance operations.</p>
+      <p>I’m passionate about financial technologies and public service innovation through e-Governance platforms, aiming to simplify finance for citizens and improve transparency.</p>
+    </div>
+  </div>
+
+</body>
+</html>
